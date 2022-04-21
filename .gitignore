@@ -20,8 +20,8 @@ lerna-debug.log*
 
 # IDEs and editors
 /.idea
-/.production.env
-/.development.env
+.production.env
+.development.env
 .project
 .classpath
 .c9/
