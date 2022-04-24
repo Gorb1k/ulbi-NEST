@@ -1,6 +1,7 @@
 import {NestFactory} from "@nestjs/core";
 import {AppModule} from "./app.module";
 import { DocumentBuilder, SwaggerModule } from "@nestjs/swagger";
+import { ValidationPipe } from "./pipes/validation.pipe";
 
 
 async function start() {
@@ -13,7 +14,14 @@ async function start() {
       .addTag('PRACTICE')
       .build()
     const swaggerDoc = SwaggerModule.createDocument(app, config)
+
+    //Подключение Swagger
     SwaggerModule.setup('api/docs', app, swaggerDoc)
+
+    //Подключение глобального пайпа (Мржно подключить много через запятую)
+    app.useGlobalPipes(new ValidationPipe())
+
+    //Запуск сервера
     await app.listen(PORT, () => console.log(`Server is started on ${PORT} port...`))
 }
 
